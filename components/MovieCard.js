@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { getImageUrl } from "../lib/utils";
 
-// Card de um Pokémon (o nome MovieCard foi mantido do projeto original)
 export default function MovieCard({ pokemon }) {
   return (
     <div>

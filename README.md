@@ -35,7 +35,7 @@ npm start
 
 ## Rotas
 
-- `/` lista de Pokémon (com filtro de ordenação e cache no localStorage)
+- `/` lista de Pokémon (com filtro de ordenação)
 - `/search` busca de Pokémon pelo nome (SearchBar + Filters)
 - `/movie/[id]` detalhes do Pokémon (ex: `/movie/25`)
 
@@ -45,22 +45,13 @@ npm start
 - `components/` ErrorState, Filters, Header, Loader, MovieCard, MovieList, SearchBar
   (MovieCard e MovieList foram mantidos com esses nomes, mas mostram Pokémon)
 - `lib/apiClient.js` axios configurado com a baseURL da PokéAPI
-- `lib/cache.js` funções de cache no localStorage
 - `lib/utils.js` funções auxiliares (id da url, imagem, ordenação)
-- `hooks/useLocalStorage.js` hook que lê e salva no localStorage
 
 ## Hooks usados
 
 - `useState` e `useEffect` em todas as páginas
 - `useMemo`, `useCallback` e `useRef` em `/search`
 - `useRouter` e `Link` na navegação
-
-## Cache (localStorage)
-
-- Chave `pokemons`: lista da página inicial
-- Chave `allPokemons`: lista completa usada na busca
-
-Para limpar, use o DevTools do navegador (Application > Local Storage).
 
 ## Deploy na Vercel
 

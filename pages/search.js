@@ -1,6 +1,5 @@
 import { useState, useEffect, useMemo, useCallback, useRef } from "react";
 import apiClient from "../lib/apiClient";
-import { loadCache, saveCache } from "../lib/cache";
 import { toPokemon, sortPokemons } from "../lib/utils";
 import Header from "../components/Header";
 import SearchBar from "../components/SearchBar";
@@ -17,24 +16,12 @@ export default function SearchPage() {
   const [error, setError] = useState("");
   const inputRef = useRef(null);
 
-  // A PokéAPI não tem busca por texto: baixamos a lista de nomes (GET)
-  // e filtramos aqui. A lista fica guardada no localStorage.
   const loadAll = useCallback(() => {
-    const cached = loadCache("allPokemons", []);
-    if (cached.length > 0) {
-      setAllPokemons(cached);
-      setLoading(false);
-      return;
-    }
     setLoading(true);
     setError("");
     apiClient
       .get("/pokemon", { params: { limit: 1500 } })
-      .then((response) => {
-        const list = response.data.results.map(toPokemon);
-        setAllPokemons(list);
-        saveCache("allPokemons", list);
-      })
+      .then((response) => setAllPokemons(response.data.results.map(toPokemon)))
       .catch(() => setError("Erro ao buscar os Pokémon."))
       .finally(() => setLoading(false));
   }, []);
